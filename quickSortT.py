@@ -26,37 +26,39 @@ def partition(array, low, high):
     return i + 1
 
 # Função para executar o Quicksort
-def quickSort(array, low, high):
+def quickSortT(array, low, high):
     if low < high:
         # Encontra o elemento pivô tal que elementos menores que o pivô
         # estejam à esquerda e os maiores à direita
         pi = partition(array, low, high)
 
         # Chamada recursiva à esquerda do pivô
-        quickSort(array, low, pi - 1)
+        quickSortT(array, low, pi - 1)
 
         # Chamada recursiva à direita do pivô
-        quickSort(array, pi + 1, high)
+        quickSortT(array, pi + 1, high)
+
+# Função para gerar um array aleatório
+def generate_random_array(min_val, max_val, size):
+    return [random.randint(min_val, max_val) for _ in range(size)]
 
 # Função principal
 def main():
-    # Entrada do usuário para limites e tamanho do array
-    min_val = int(input("Digite o valor mínimo para o intervalo de números: "))
-    max_val = int(input("Digite o valor máximo para o intervalo de números: "))
-    size = int(input("Digite o tamanho do array: "))
-    test_count = int(input("Digite a quantidade de testes: "))
+    # Valores manuais
+    min_val = -1000
+    max_val = 1000
+    size = 1000
 
-    for test in range(1, test_count + 1):
-        # Gera o array aleatório com valores entre min_val e max_val
-        data = [random.randint(min_val, max_val) for _ in range(size)]
-        print(f"\nArray gerado no teste {test}:")
-        print(data)
+    # Gera o array aleatório com valores entre min_val e max_val
+    data = generate_random_array(min_val, max_val, size)
+    print("Array gerado:")
+    print(data)
 
-        # Ordena o array
-        quickSort(data, 0, len(data) - 1)
+    # Ordena o array
+    quickSortT(data, 0, len(data) - 1)
 
-        print(f"\nArray ordenado em ordem crescente no teste {test}:")
-        print(data)
+    print("\nArray ordenado em ordem crescente:")
+    print(data)
 
 # Chamada da função principal
 if __name__ == "__main__":
